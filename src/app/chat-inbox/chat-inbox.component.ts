@@ -10,6 +10,7 @@ const SOCKET_ENDPOINT = 'chat-app-laki.herokuapp.com';
 export class ChatInboxComponent implements OnInit {
   socket: any;
   message: string = "";
+  messages: {text: string, self: boolean}[] = [];
   constructor() { }
 
   ngOnInit() {
@@ -21,28 +22,29 @@ export class ChatInboxComponent implements OnInit {
     this.socket = io(SOCKET_ENDPOINT);
     this.socket.on('message-broadcast', (data: string) => {
       if (data) {
-        const element = document.createElement('li');
+        this.messages.push({text: data, self: false});
+        /*const element = document.createElement('li');
         element.innerText = data;
         element.style.background = 'white';
         element.style.padding =  '15px 30px';
         element.style.margin = '10px';
         // @ts-ignore
-        document.getElementById('message-list').appendChild(element);
+        document.getElementById('message-list').appendChild(element);*/
       }
     });
   }
 
   SendMessage() {
-    if (!this.message) return;
     this.socket.emit('message', this.message);
-    const element = document.createElement('li');
+    this.messages.push({text: this.message, self: true});
+    /*const element = document.createElement('li');
     element.innerHTML = this.message;
     element.style.background = 'white';
     element.style.padding =  '15px 30px';
     element.style.margin = '10px';
     element.style.textAlign = 'right';
     // @ts-ignore
-    document.getElementById('message-list').appendChild(element);
+    document.getElementById('message-list').appendChild(element);*/
     this.message = '';
   }
 }
