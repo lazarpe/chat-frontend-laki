@@ -33,6 +33,7 @@ export class ChatInboxComponent implements OnInit {
   }
 
   SendMessage() {
+    if (!this.message) return;
     this.socket.emit('message', this.message);
     const element = document.createElement('li');
     element.innerHTML = this.message;
