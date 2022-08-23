@@ -22,7 +22,7 @@ export class ChatInboxComponent implements OnInit {
     this.socket.on('message-broadcast', (data: string) => {
       if (data) {
         const element = document.createElement('li');
-        element.innerHTML = data;
+        element.innerText = data;
         element.style.background = 'white';
         element.style.padding =  '15px 30px';
         element.style.margin = '10px';
