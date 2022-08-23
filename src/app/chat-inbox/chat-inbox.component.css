@@ -26,3 +26,6 @@
   margin: auto 40px;
   width: 100px;
 }
+.selfMessage {
+ textAlign = 'right' 
+}
